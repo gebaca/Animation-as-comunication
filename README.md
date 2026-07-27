@@ -1,2 +1,2 @@
 # Animation-as-comunication
-Case study for the use of animatios as a replacement for text in comercial software
+Case study for the use of animatios as replacement for text in comercial software
