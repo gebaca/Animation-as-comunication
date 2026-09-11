@@ -45,9 +45,12 @@ export default function TeamSummary() {
           return (
             <div
               key={member.id}
-              className={`flex gap-2.5 items-center rounded-[var(--radius-row)] overflow-hidden ${styles.bg}`}
+              className={`flex gap-2.5 items-stretch rounded-[var(--radius-row)] overflow-hidden ${styles.bg}`}
             >
-              <div className={`h-full w-1 shrink-0 ${styles.accent}`} />
+              {/* Usa self-stretch y asegúrate de apuntar a la variable de color correcta */}
+              <div
+                className={`w-1 shrink-0 self-stretch ${styles.accent ?? styles.accent}`}
+              />
               <p className='text-[length:var(--text-body)] text-(--text-screen) py-1.5 pr-2'>
                 {member.name} - permiso editado{' '}
                 {formatRelativeHours(member.recentChange!.timestamp)}

@@ -23,8 +23,23 @@ export default function Screen() {
     onlyRecentChanges
   );
 
+  // Maneja el toggle (si ya está seleccionado, lo desselecciona)
+  const handleSelectMember = (member: Member) => {
+    setSelectedMember((prev) => (prev?.id === member.id ? null : member));
+  };
+
+  // Vuelve a 'team' si se clica en la zona exterior
+  const handleBackgroundClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      setSelectedMember(null);
+    }
+  };
+
   return (
-    <div className='flex gap-4'>
+    <div
+      onClick={handleBackgroundClick}
+      className='flex gap-4 p-4 min-h-screen'
+    >
       <div className='flex flex-col gap-2.5'>
         <SearchBar
           text={text}
@@ -36,14 +51,13 @@ export default function Screen() {
           adminCount={stats.adminCount}
           recentChangesCount={stats.recentChangesCount}
         />
-        <Table members={filteredMembers} onSelectMember={setSelectedMember} />
+        <Table members={filteredMembers} onSelectMember={handleSelectMember} />
       </div>
 
-      {selectedMember ? (
-        <SummaryPanel type='user' member={selectedMember} />
-      ) : (
-        <SummaryPanel type='team' member={null} />
-      )}
+      <SummaryPanel
+        type={selectedMember ? 'user' : 'team'}
+        member={selectedMember}
+      />
     </div>
   );
 }

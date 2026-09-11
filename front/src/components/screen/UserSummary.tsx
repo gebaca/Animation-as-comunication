@@ -60,12 +60,12 @@ export default function UserSummary({ member }: { member: Member }) {
         <>
           <div className='border-t border-(--border-card) my-2.5' />
           <div
-            className={`flex items-center rounded-[var(--radius-row)] ${
+            className={`flex items-stretch rounded-[var(--radius-row)] ${
               SEVERITY_STYLES[member.recentChange.severity].bg
             }`}
           >
             <div
-              className={`h-full w-1 shrink-0 ${SEVERITY_STYLES[member.recentChange.severity].accent}`}
+              className={`w-1 shrink-0 self-stretch ${SEVERITY_STYLES[member.recentChange.severity].accent}`}
             />
             <div className='flex flex-col gap-1 px-2.5 py-2'>
               <span className='text-[length:var(--text-body)] font-bold'>
