@@ -1,6 +1,6 @@
-// src/components/screen/Row.tsx
 import type { Member } from '../../mocks/workers';
 import { getPrimaryRole } from '../../mocks/workers';
+import { SEVERITY_STYLES } from '../../utils/severityStyles';
 
 interface RowProps {
   member: Member;
@@ -16,29 +16,28 @@ const TIER_LABELS: Record<string, string> = {
 export default function Row({ member, onSelect }: RowProps) {
   const primaryRole = getPrimaryRole(member);
   const severity = member.recentChange?.severity;
+  const borderClass = severity
+    ? SEVERITY_STYLES[severity].bg
+    : 'border-(--border-row)';
 
   return (
     <button
       onClick={() => onSelect(member)}
-      className={`flex items-center gap-2.5 w-full text-left px-2.5 py-2 rounded-lg border ${
-        severity === 'high'
-          ? 'border-(--high-main)'
-          : severity === 'medium'
-            ? 'border-(--mid-main)'
-            : 'border-(--border-row)'
-      }`}
+      className={`flex items-center gap-2.5 w-full text-left px-2.5 py-2 rounded-lg border bg-(--bg-row) ${borderClass}`}
     >
-      <div className='bg-[#E6F1FB] border border-[#D1E0F0] rounded-full w-8 h-8 flex items-center justify-center font-bold text-[12px] tracking-wide shrink-0'>
+      <div className='bg-[#E6F1FB] border border-[#D1E0F0] rounded-full w-8 h-8 flex items-center justify-center font-bold text-(--text-caption) tracking-wide shrink-0'>
         {member.initials}
       </div>
       <div className='flex flex-col'>
-        <span className='text-[13px] font-bold leading-4 text-gray-900'>
+        <span className='text-(--text-label) font-bold leading-4 text-(--text-screen)'>
           {member.name}
         </span>
-        <span className='text-[11px] text-gray-500'>{member.position}</span>
+        <span className='text-(--text-caption) text-(--text-secondary-screen)'>
+          {member.position}
+        </span>
       </div>
       {primaryRole && (
-        <span className='ml-auto text-[11px] text-gray-500'>
+        <span className='ml-auto text-(--text-caption) text-(--text-secondary-screen)'>
           {TIER_LABELS[primaryRole]}
         </span>
       )}

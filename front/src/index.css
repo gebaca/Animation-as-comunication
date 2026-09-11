@@ -19,11 +19,11 @@
   --text-secondary-screen: #6b7280;
   --text-accent: #1a1a1a;
 
-  --text-caption: 11px; /* timestamps, datos secundarios */
-  --text-body: 13px; /* texto de permisos, párrafos normales */
-  --text-label: 15px; /* nombre en Row, posición destacada */
-  --text-title: 18px; /* nombre en UserSummary, títulos de card */
-  --text-stat: 24px; /* números grandes (Members, Admins) — ya lo tenías hardcodeado */
+  --font-size-caption: 11px;
+  --font-size-body: 13px;
+  --font-size-label: 15px;
+  --font-size-title: 18px;
+  --font-size-stat: 24px;
 
   /* Card */
   --border-card: #d9d9d9;

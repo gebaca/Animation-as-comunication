@@ -5,14 +5,7 @@ import {
   DEPARTMENT_NAME,
 } from '../../mocks/workers';
 import { formatRelativeHours } from '../../utils/formatTime';
-
-const SEVERITY_STYLES: Record<
-  'medium' | 'high',
-  { bg: string; accent: string }
-> = {
-  medium: { bg: 'bg-(--mid-accent)', accent: 'bg-(--mid-main)' },
-  high: { bg: 'bg-(--high-accent)', accent: 'bg-(--high-main)' },
-};
+import { SEVERITY_STYLES } from '../../utils/severityStyles';
 
 export default function TeamSummary() {
   const teamStats = getTeamStats(members);
@@ -20,17 +13,26 @@ export default function TeamSummary() {
 
   return (
     <>
-      <h2 className='font-bold text-[15px] pl-2.5'>{DEPARTMENT_NAME}</h2>
+      <h2 className='font-bold text-[length:var(--text-title)] text-(--text-screen) pl-2.5'>
+        {DEPARTMENT_NAME}
+      </h2>
       <div className='flex flex-col gap-2.5 px-2.5 py-2.5'>
         <div className='flex gap-2.5 text-(--text-accent)'>
-          <div className=' bg-[#E7E7E7] flex flex-col w-full px-2.5'>
-            <p className='font-light'>Members</p>
-            <p className='font-bold text-[24px]'>{teamStats.totalMembers}</p>
+          <div className='bg-[#E7E7E7] flex flex-col w-full px-2.5 py-1 rounded-[var(--radius-row)]'>
+            <p className='font-light text-[length:var(--text-caption)] text-(--text-secondary-screen)'>
+              Members
+            </p>
+            <p className='font-bold text-[24px] leading-tight'>
+              {teamStats.totalMembers}
+            </p>
           </div>
-          <div className='bg-[#E7E7E7] flex flex-col w-full px-2.5'>
-            <p className='font-light'>Admins</p>
-
-            <p className='font-bold text-[24px] '>{teamStats.adminCount}</p>
+          <div className='bg-[#E7E7E7] flex flex-col w-full px-2.5 py-1 rounded-[var(--radius-row)]'>
+            <p className='font-light text-[length:var(--text-caption)] text-(--text-secondary-screen)'>
+              Admins
+            </p>
+            <p className='font-bold text-[24px] leading-tight'>
+              {teamStats.adminCount}
+            </p>
           </div>
         </div>
       </div>
@@ -43,10 +45,10 @@ export default function TeamSummary() {
           return (
             <div
               key={member.id}
-              className={`flex gap-2.5 items-center ${styles.bg}`}
+              className={`flex gap-2.5 items-center rounded-[var(--radius-row)] overflow-hidden ${styles.bg}`}
             >
-              <div className={`h-full w-1 ${styles.accent}`} />
-              <p>
+              <div className={`h-full w-1 shrink-0 ${styles.accent}`} />
+              <p className='text-[length:var(--text-body)] text-(--text-screen) py-1.5 pr-2'>
                 {member.name} - permiso editado{' '}
                 {formatRelativeHours(member.recentChange!.timestamp)}
               </p>
