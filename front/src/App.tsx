@@ -1,11 +1,9 @@
-import './App.css';
+//import Paper from './pages/paper/Paper';
+//<Paper />
+import Screen from './pages/screen/Screen';
 
 function App() {
-  return (
-    <>
-      <div className='bg-linear-to-r from-purple-500 to-pink-500 min-h-screen flex items-center justify-center'></div>
-    </>
-  );
+  return <Screen />;
 }
 
 export default App;

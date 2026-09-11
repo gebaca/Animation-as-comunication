@@ -1,0 +1,96 @@
+.section_Layout {
+  padding-left: 6.625rem;
+  padding-right: 6.625rem;
+  padding-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  height: auto;
+}
+
+/* Reset de márgenes internos */
+.title_Section p,
+.title_Section span,
+.title_Section h2,
+.content_Section p {
+  margin: 0;
+  padding: 0;
+}
+
+.title_Section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-start;
+}
+
+/* Título fluido idéntico a la estructura de Intro */
+.title_Text {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1.2;
+  color: var(--text-paper, #000);
+  /* Asegura flujo de texto normal */
+  display: block;
+}
+
+.text_Accent {
+  color: var(--accent-paper, #5daced);
+  display: inline; /* Permite mantenerse en la misma línea */
+}
+
+.content_Section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.content_Section p {
+  font-size: 24px;
+  line-height: 1.6;
+  max-width: 85%;
+}
+
+.number_Section {
+  color: #5daced;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+}
+/* añadir a Section.module.css */
+.demoRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.gifPlaceholder {
+  width: 220px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-paper);
+  border: 1px dashed var(--text-paper);
+  color: var(--text-paper);
+  opacity: 0.5;
+  font-size: 13px;
+}
+
+.demoButton {
+  padding: 10px 24px;
+  background-color: var(--accent-paper);
+  color: var(--background-paper);
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.demoButton:hover {
+  opacity: 0.85;
+}

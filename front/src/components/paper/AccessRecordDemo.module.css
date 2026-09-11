@@ -1,0 +1,59 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  background-color: transparent;
+}
+
+.card {
+  width: 280px;
+  min-height: 140px;
+  padding: 20px;
+  background-color: color-mix(in srgb, var(--accent-paper) 10%, transparent);
+  border: 1px solid var(--accent-paper);
+  border-radius: 6px;
+}
+
+.blankFrame {
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
+  background-color: transparent;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  background-color: transparent;
+}
+
+.name {
+  font-weight: 600;
+  color: var(--text-paper);
+  background-color: transparent;
+}
+
+.role {
+  font-size: 13px;
+  color: var(--text-paper);
+  opacity: 0.6;
+  background-color: transparent;
+}
+
+.permissions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background-color: transparent;
+}
+
+.permission {
+  font-size: 14px;
+  color: var(--text-paper);
+  background-color: transparent;
+}

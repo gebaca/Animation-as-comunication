@@ -1,0 +1,28 @@
+/* src/pages/Paper/components/BeforeAfterToggle.module.css */
+.toggle {
+  display: inline-flex;
+  border: 1px solid var(--text-paper);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.button {
+  padding: 8px 20px;
+  background-color: var(--background-paper);
+  color: var(--text-paper);
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.button:not(:last-child) {
+  border-right: 1px solid var(--text-paper);
+}
+
+.active {
+  background-color: var(--accent-paper);
+  color: var(--background-paper);
+}

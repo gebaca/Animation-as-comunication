@@ -1,0 +1,41 @@
+body {
+  background-color: var(--background-paper);
+  color: var(--text-paper);
+}
+
+.title_Section {
+  display: flex;
+  flex-direction: column;
+  gap: 5.9375rem; /* Mantiene la separación con el subtítulo */
+
+  padding-left: 6.625rem;
+  padding-right: 6.625rem;
+  padding-bottom: 0.625rem;
+  padding-top: 1.25rem;
+  align-items: flex-start;
+}
+
+.title_Text {
+  font-size: 3.75rem;
+  color: var(--text-paper);
+  font-weight: bold;
+
+  /* Reduce el espacio/separación entre las 2 líneas del título */
+  line-height: 1.05;
+}
+
+.text_Accent {
+  font-size: 3.125rem;
+  color: var(--accent-paper);
+  /* Mantenemos inline para que 'Functional' fluya en la primera línea */
+  display: inline;
+}
+.text_Subtitle {
+  font-size: var(--title-section-paper);
+  color: var(--text-paper);
+}
+
+.text_Subtitle_Accent {
+  font-size: var(--title-section-paper);
+  color: var(--accent-paper);
+}

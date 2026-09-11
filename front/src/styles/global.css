@@ -1,0 +1,12 @@
+:root {
+  /* Paper */
+  --accent-paper: #5daced;
+  --background-paper: #fffff8;
+  --text-paper: #212121;
+  --title-section-paper: 2rem;
+
+  /* Screen */
+  --background-screen: #ffffff;
+  --text-screen: #000000;
+  --user-tint: #e6f1fb;
+}
