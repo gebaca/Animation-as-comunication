@@ -55,6 +55,7 @@ export default function Screen() {
           <Table
             members={filteredMembers}
             onSelectMember={handleSelectMember}
+            selectedMemberId={selectedMember?.id ?? null}
           />
           <SummaryPanel
             type={selectedMember ? 'user' : 'team'}

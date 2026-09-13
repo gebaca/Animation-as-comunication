@@ -8,6 +8,7 @@ import { SEVERITY_STYLES } from '../../utils/severityStyles';
 interface RowProps {
   member: Member;
   onSelect: (member: Member) => void;
+  isSelected: boolean;
 }
 
 const TIER_LABELS: Record<string, string> = {
@@ -27,7 +28,7 @@ function extractCssVar(tailwindClass: string): string {
   return match ? `var(${match[1]})` : '';
 }
 
-export default function Row({ member, onSelect }: RowProps) {
+export default function Row({ member, onSelect, isSelected }: RowProps) {
   const containerRef = useRef<HTMLButtonElement>(null);
   const pulseRef = useRef<HTMLDivElement>(null);
   const stoppedRef = useRef(false);
@@ -52,15 +53,14 @@ export default function Row({ member, onSelect }: RowProps) {
       stoppedRef.current = false;
 
       const fireClickPulse = () => {
+        gsap.killTweensOf(pulseEl); // fuerza reinicio limpio en cada click, aunque spamees
         gsap.set(pulseEl, {
           opacity: 0.5,
           scaleX: 1.02,
           scaleY: 1.2,
-          backgroundColor: 'var(--border-row)',
+          backgroundColor: borderColor, // mismo color que el borde actual
         });
         gsap.to(pulseEl, {
-          //scaleX: 0.9,
-          //scaleY: 0.9,
           opacity: 0,
           duration: 1,
           ease: 'power2.out',
@@ -128,9 +128,14 @@ export default function Row({ member, onSelect }: RowProps) {
   return (
     <button
       ref={containerRef}
-      onClick={() => onSelect(member)}
+      onClick={(e) => {
+        e.stopPropagation();
+        onSelect(member);
+      }}
       style={{ borderColor }}
-      className='relative flex items-center gap-2.5 w-full text-left px-2.5 py-2 rounded-lg overflow-visible border bg-(--bg-row) transition-colors duration-200 ease-out hover:bg-[#ebebee]'
+      className={`relative flex items-center gap-2.5 w-full text-left px-2.5 py-2 rounded-lg overflow-visible border transition-colors duration-200 ease-out hover:bg-(--hover-row) ${
+        isSelected ? 'bg-(--click-row)' : 'bg-(--bg-row)'
+      }`}
     >
       <div
         ref={pulseRef}
