@@ -104,6 +104,10 @@ export const members: Member[] = [
   },
 ];
 
+export const initialMembersSnapshot: Member[] = JSON.parse(
+  JSON.stringify(members)
+);
+
 const TIER_RANK: Record<Tier, number> = {
   viewer: 1,
   editor: 2,

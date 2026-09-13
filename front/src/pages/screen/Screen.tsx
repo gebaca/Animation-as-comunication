@@ -1,39 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBar from '../../components/screen/SearchBar';
 import Table from '../../components/screen/Table';
 import SummaryPanel from '../../components/screen/SummaryPanel';
 import {
-  members,
+  members as initialMembers,
   getTeamStats,
   searchMembers,
+  applyRandomChange,
   type Member,
 } from '../../mocks/workers';
 
+const RANDOM_CHANGE_INTERVAL_MS = 10000;
+
 export default function Screen() {
+  const [membersState, setMembersState] = useState<Member[]>(initialMembers);
   const [text, setText] = useState('');
   const [onlyAdmins, setOnlyAdmins] = useState(false);
   const [onlyRecentChanges, setOnlyRecentChanges] = useState(false);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
 
-  const stats = getTeamStats(members);
+  /*const handleReset = () => {
+    setMembersState(initialMembersSnapshot);
+    setSelectedMember(null);
+  };*/
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMembersState((prev) => applyRandomChange(prev));
+    }, RANDOM_CHANGE_INTERVAL_MS);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const stats = getTeamStats(membersState);
   const filteredMembers = searchMembers(
-    members,
+    membersState,
     text,
     onlyAdmins,
     onlyRecentChanges
   );
 
-  // Maneja el toggle (si ya está seleccionado, lo desselecciona)
   const handleSelectMember = (member: Member) => {
     setSelectedMember((prev) => (prev?.id === member.id ? null : member));
   };
 
-  // Vuelve a 'team' si se clica en la zona exterior
   const handleBackgroundClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       setSelectedMember(null);
     }
   };
+
+  // Si el seleccionado recibió un cambio nuevo, mantenemos la referencia actualizada.
+  const currentSelectedMember = selectedMember
+    ? (membersState.find((m) => m.id === selectedMember.id) ?? null)
+    : null;
 
   return (
     <div
@@ -55,11 +75,12 @@ export default function Screen() {
           <Table
             members={filteredMembers}
             onSelectMember={handleSelectMember}
-            selectedMemberId={selectedMember?.id ?? null}
+            selectedMemberId={currentSelectedMember?.id ?? null}
           />
           <SummaryPanel
-            type={selectedMember ? 'user' : 'team'}
-            member={selectedMember}
+            type={currentSelectedMember ? 'user' : 'team'}
+            member={currentSelectedMember}
+            members={membersState}
             onSelectMember={handleSelectMember}
           />
         </div>

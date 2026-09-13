@@ -8,12 +8,14 @@ interface SummaryPanelProps {
   type: 'user' | 'team';
   member: Member | null;
   onSelectMember: (member: Member) => void;
+  members: Member[];
 }
 
 export default function SummaryPanel({
   type,
   member,
   onSelectMember,
+  members,
 }: SummaryPanelProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -112,7 +114,7 @@ export default function SummaryPanel({
           <UserSummary member={displayed.member} />
         )}
         {displayed.type === 'team' && (
-          <TeamSummary onSelectMember={onSelectMember} />
+          <TeamSummary members={members} onSelectMember={onSelectMember} />
         )}{' '}
       </div>
     </div>

@@ -122,7 +122,7 @@ export default function Row({ member, onSelect, isSelected }: RowProps) {
         el.removeEventListener('click', onClick);
       };
     },
-    { scope: containerRef, dependencies: [severity] }
+    { scope: containerRef, dependencies: [member.recentChange?.timestamp] }
   );
 
   return (

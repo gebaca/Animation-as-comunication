@@ -1,7 +1,6 @@
 import {
   getRecentTeamChanges,
   getTeamStats,
-  members,
   DEPARTMENT_NAME,
   type Member,
 } from '../../mocks/workers';
@@ -9,10 +8,14 @@ import { formatRelativeHours } from '../../utils/formatTime';
 import { SEVERITY_STYLES } from '../../utils/severityStyles';
 
 interface TeamSummaryProps {
+  members: Member[];
   onSelectMember: (member: Member) => void;
 }
 
-export default function TeamSummary({ onSelectMember }: TeamSummaryProps) {
+export default function TeamSummary({
+  onSelectMember,
+  members,
+}: TeamSummaryProps) {
   const teamStats = getTeamStats(members);
   const recentChanges = getRecentTeamChanges(members);
 
