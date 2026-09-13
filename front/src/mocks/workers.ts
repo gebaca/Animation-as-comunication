@@ -109,6 +109,51 @@ const TIER_RANK: Record<Tier, number> = {
   editor: 2,
   admin: 3,
 };
+const RESOURCES: Resource[] = ['reporting', 'financeOps', 'userManagement'];
+const TIERS: Tier[] = ['viewer', 'editor', 'admin'];
+
+function pickRandomResource(): Resource {
+  return RESOURCES[Math.floor(Math.random() * RESOURCES.length)];
+}
+
+function pickDifferentTier(current: Tier | null): Tier {
+  const options = TIERS.filter((t) => t !== current);
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+function rankOf(tier: Tier | null): number {
+  return tier ? TIER_RANK[tier] : 0;
+}
+
+export function applyRandomChange(memberList: Member[]): Member[] {
+  // Preferimos a alguien sin alerta activa; si todos ya tienen, cualquiera vale.
+  const candidates = memberList.filter((m) => !m.recentChange);
+  const pool = candidates.length > 0 ? candidates : memberList;
+  const target = pool[Math.floor(Math.random() * pool.length)];
+
+  const resource = pickRandomResource();
+  const previousTier = target.accessMatrix[resource] ?? null;
+  const currentTier = pickDifferentTier(previousTier);
+
+  const severity: Severity =
+    Math.abs(rankOf(currentTier) - rankOf(previousTier)) >= 2
+      ? 'high'
+      : 'medium';
+
+  const updatedMember: Member = {
+    ...target,
+    accessMatrix: { ...target.accessMatrix, [resource]: currentTier },
+    recentChange: {
+      resource,
+      previousTier,
+      currentTier,
+      severity,
+      timestamp: new Date().toISOString(),
+    },
+  };
+
+  return memberList.map((m) => (m.id === target.id ? updatedMember : m));
+}
 
 export function getPrimaryRole(member: Member): Tier | null {
   const tiers = Object.values(member.accessMatrix) as Tier[];

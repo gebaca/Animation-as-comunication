@@ -122,19 +122,26 @@ export default function SearchBar({
         />
       </div>
 
-      <div className='flex gap-3 px-2 text-[12px] text-gray-500'>
+      <div className='flex gap-2 px-2'>
         <button
           type='button'
           onClick={onToggleAdmins}
-          className={onlyAdmins ? 'font-bold text-black' : ''}
+          className={`px-3 py-1 rounded-full text-[12px] font-medium transition-colors duration-150 ${
+            onlyAdmins
+              ? 'bg-(--text-screen) text-white'
+              : 'bg-(--accent-card) text-(--text-secondary-screen) hover:bg-(--hover-row)'
+          }`}
         >
           {adminCount} admins
         </button>
-        <span>·</span>
         <button
           type='button'
           onClick={onToggleRecentChanges}
-          className={onlyRecentChanges ? 'font-bold text-black' : ''}
+          className={`px-3 py-1 rounded-full text-[12px] font-medium transition-colors duration-150 ${
+            onlyRecentChanges
+              ? 'bg-(--text-screen) text-white'
+              : 'bg-(--accent-card) text-(--text-secondary-screen) hover:bg-(--hover-row)'
+          }`}
         >
           {recentChangesCount} recent changes
         </button>

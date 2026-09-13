@@ -60,6 +60,7 @@ export default function Screen() {
           <SummaryPanel
             type={selectedMember ? 'user' : 'team'}
             member={selectedMember}
+            onSelectMember={handleSelectMember}
           />
         </div>
       </div>

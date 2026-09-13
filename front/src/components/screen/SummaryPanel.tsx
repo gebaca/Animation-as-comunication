@@ -7,9 +7,14 @@ import { type Member } from '../../mocks/workers';
 interface SummaryPanelProps {
   type: 'user' | 'team';
   member: Member | null;
+  onSelectMember: (member: Member) => void;
 }
 
-export default function SummaryPanel({ type, member }: SummaryPanelProps) {
+export default function SummaryPanel({
+  type,
+  member,
+  onSelectMember,
+}: SummaryPanelProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
@@ -106,7 +111,9 @@ export default function SummaryPanel({ type, member }: SummaryPanelProps) {
         {displayed.type === 'user' && displayed.member && (
           <UserSummary member={displayed.member} />
         )}
-        {displayed.type === 'team' && <TeamSummary />}
+        {displayed.type === 'team' && (
+          <TeamSummary onSelectMember={onSelectMember} />
+        )}{' '}
       </div>
     </div>
   );

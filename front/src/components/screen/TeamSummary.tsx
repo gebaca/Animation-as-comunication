@@ -3,11 +3,16 @@ import {
   getTeamStats,
   members,
   DEPARTMENT_NAME,
+  type Member,
 } from '../../mocks/workers';
 import { formatRelativeHours } from '../../utils/formatTime';
 import { SEVERITY_STYLES } from '../../utils/severityStyles';
 
-export default function TeamSummary() {
+interface TeamSummaryProps {
+  onSelectMember: (member: Member) => void;
+}
+
+export default function TeamSummary({ onSelectMember }: TeamSummaryProps) {
   const teamStats = getTeamStats(members);
   const recentChanges = getRecentTeamChanges(members);
 
@@ -16,7 +21,7 @@ export default function TeamSummary() {
       <h2 className='font-bold text-[length:var(--text-title)] text-(--text-screen) pl-2.5'>
         {DEPARTMENT_NAME}
       </h2>
-      <div className='flex flex-col 3 px-2.5 py-2.5'>
+      <div className='flex flex-col gap-2.5 px-2.5 py-2.5'>
         <div className='flex gap-2.5 text-(--text-accent)'>
           <div className='bg-[#E7E7E7] flex flex-col w-full px-2.5 py-1 rounded-[var(--radius-row)]'>
             <p className='font-light text-[length:var(--text-caption)] text-(--text-secondary-screen)'>
@@ -43,19 +48,20 @@ export default function TeamSummary() {
           const styles = SEVERITY_STYLES[severity];
 
           return (
-            <div
+            <button
               key={member.id}
-              className={`flex gap-2.5 items-stretch rounded-[var(--radius-row)] overflow-hidden ${styles.bg}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                onSelectMember(member);
+              }}
+              className={`flex gap-2.5 items-stretch rounded-[var(--radius-row)] overflow-hidden text-left transition-colors duration-200 hover:brightness-95 ${styles.bg}`}
             >
-              {/* Usa self-stretch y asegúrate de apuntar a la variable de color correcta */}
-              <div
-                className={`w-1 shrink-0 self-stretch ${styles.accent ?? styles.accent}`}
-              />
+              <div className={`w-1 shrink-0 self-stretch ${styles.accent}`} />
               <p className='text-[length:var(--text-body)] text-(--text-screen) py-1.5 pr-2'>
                 {member.name} - permiso editado{' '}
                 {formatRelativeHours(member.recentChange!.timestamp)}
               </p>
-            </div>
+            </button>
           );
         })}
       </div>
