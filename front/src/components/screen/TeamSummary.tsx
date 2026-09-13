@@ -16,7 +16,7 @@ export default function TeamSummary() {
       <h2 className='font-bold text-[length:var(--text-title)] text-(--text-screen) pl-2.5'>
         {DEPARTMENT_NAME}
       </h2>
-      <div className='flex flex-col gap-2.5 px-2.5 py-2.5'>
+      <div className='flex flex-col 3 px-2.5 py-2.5'>
         <div className='flex gap-2.5 text-(--text-accent)'>
           <div className='bg-[#E7E7E7] flex flex-col w-full px-2.5 py-1 rounded-[var(--radius-row)]'>
             <p className='font-light text-[length:var(--text-caption)] text-(--text-secondary-screen)'>

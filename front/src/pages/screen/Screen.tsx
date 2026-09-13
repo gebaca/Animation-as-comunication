@@ -38,9 +38,9 @@ export default function Screen() {
   return (
     <div
       onClick={handleBackgroundClick}
-      className='flex gap-4 p-4 min-h-screen'
+      className='flex min-h-screen min-w-screen px-50 py-30'
     >
-      <div className='flex flex-col gap-2.5'>
+      <div className='flex flex-col gap-15'>
         <SearchBar
           text={text}
           onTextChange={setText}
@@ -51,13 +51,17 @@ export default function Screen() {
           adminCount={stats.adminCount}
           recentChangesCount={stats.recentChangesCount}
         />
-        <Table members={filteredMembers} onSelectMember={handleSelectMember} />
+        <div className='flex gap-12'>
+          <Table
+            members={filteredMembers}
+            onSelectMember={handleSelectMember}
+          />
+          <SummaryPanel
+            type={selectedMember ? 'user' : 'team'}
+            member={selectedMember}
+          />
+        </div>
       </div>
-
-      <SummaryPanel
-        type={selectedMember ? 'user' : 'team'}
-        member={selectedMember}
-      />
     </div>
   );
 }

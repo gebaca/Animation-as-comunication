@@ -1,5 +1,4 @@
-import { useRef, useLayoutEffect, useState } from 'react';
-import { flushSync } from 'react-dom';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import TeamSummary from './TeamSummary';
 import UserSummary from './UserSummary';
@@ -13,88 +12,101 @@ interface SummaryPanelProps {
 export default function SummaryPanel({ type, member }: SummaryPanelProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
-  const [displayedContent, setDisplayedContent] = useState<{
+  const [displayed, setDisplayed] = useState<{
     type: 'user' | 'team';
     member: Member | null;
   }>({ type, member });
 
-  useLayoutEffect(() => {
+  // Ref espejo de `displayed`, para leer siempre el valor actual sin
+  // que el useEffect necesite volver a dispararse cuando displayed cambia.
+  const displayedRef = useRef(displayed);
+  useEffect(() => {
+    displayedRef.current = displayed;
+  }, [displayed]);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    const current = displayedRef.current;
+    if (current.type === type && current.member?.id === member?.id) return;
+
     const container = containerRef.current;
     const content = contentRef.current;
     if (!container || !content) return;
 
-    const targetRadius = type === 'user' ? '12px' : '24px';
+    gsap.killTweensOf(container);
+    gsap.killTweensOf(content);
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
+    const currentHeight = container.offsetHeight;
+    const exitRadius = type === 'user' ? '4px' : '16px';
 
-      tl
-        // 1. Fade Out del contenido antiguo
-        .to(content, {
-          opacity: 0,
-          y: -4,
-          duration: 0.12,
-          ease: 'power2.in',
-          onComplete: () => {
-            // Forzamos el render síncrono del nuevo DOM para medir la altura exacta
-            flushSync(() => {
-              setDisplayedContent({ type, member });
-            });
-          },
-        })
-        // 2. Animación de Altura + Border Radius (el contenido ya es el nuevo pero sigue transparente)
-        .add(() => {
-          const startHeight = container.offsetHeight;
-
-          // Medimos el alto real del nuevo JSX
-          gsap.set(container, { height: 'auto' });
-          const targetHeight = container.scrollHeight;
-
-          // Devolvemos el tween a la Timeline para que bloquee el paso al Fade In
-          return gsap.fromTo(
-            container,
-            { height: startHeight },
-            {
-              height: targetHeight,
-              borderRadius: targetRadius,
-              duration: 0.32,
-              ease: 'back.out(0.6)', // Curva elástica suave para dar sensación orgánica
-              onComplete: () => {
-                gsap.set(container, { height: 'auto' });
-              },
-            }
-          );
-        })
-        // 3. Fade In + entrada suave del nuevo contenido
-        .fromTo(
-          content,
-          { opacity: 0, y: 6 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.2,
-            ease: 'power2.out',
-          }
-        );
-    }, containerRef);
+    const tl = gsap.timeline();
+    tl.set(container, { height: currentHeight });
+    tl.to(content, { opacity: 0, duration: 0.15, ease: 'power1.out' });
+    tl.to(
+      container,
+      { borderRadius: exitRadius, duration: 0.25, ease: 'power2.inOut' },
+      '<'
+    );
+    tl.call(() => setDisplayed({ type, member }));
 
     return () => {
-      ctx.revert();
+      tl.kill();
     };
   }, [type, member]);
+
+  useLayoutEffect(() => {
+    if (isFirstRender.current) return;
+
+    const container = containerRef.current;
+    const content = contentRef.current;
+    if (!container || !content) return;
+
+    gsap.killTweensOf(container);
+    gsap.killTweensOf(content);
+
+    const startHeight = container.offsetHeight;
+
+    gsap.set(content, { opacity: 0 });
+    gsap.set(container, { height: 'auto' });
+    const targetHeight = container.scrollHeight;
+
+    const enterRadius = displayed.type === 'user' ? '16px' : '4px';
+
+    const tl = gsap.timeline();
+    tl.fromTo(
+      container,
+      { height: startHeight },
+      {
+        height: targetHeight,
+        borderRadius: enterRadius,
+        duration: 0.35,
+        ease: 'power2.out',
+      }
+    )
+      .to(content, { opacity: 1, duration: 0.2, ease: 'power1.in' }, '-=0.05')
+      .set(container, { height: 'auto' });
+
+    return () => {
+      tl.kill();
+    };
+  }, [displayed]);
 
   return (
     <div
       ref={containerRef}
-      className='flex flex-col w-89.75 bg-(--bg-card) border border-(--border-card) px-2.5 py-2.5 gap-4 overflow-hidden self-start shrink-0'
+      className='flex flex-col w-100 bg-(--bg-card) border border-(--border-card) px-3 py-5 overflow-hidden self-start shrink-0'
     >
-      <div ref={contentRef} className='flex flex-col gap-4 w-full'>
-        {displayedContent.type === 'user' && displayedContent.member ? (
-          <UserSummary member={displayedContent.member} />
-        ) : (
-          <TeamSummary />
+      <div ref={contentRef}>
+        {displayed.type === 'user' && displayed.member && (
+          <UserSummary member={displayed.member} />
         )}
+        {displayed.type === 'team' && <TeamSummary />}
       </div>
     </div>
   );

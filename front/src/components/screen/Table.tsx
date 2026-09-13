@@ -8,7 +8,7 @@ interface TableProps {
 
 export default function Table({ members, onSelectMember }: TableProps) {
   return (
-    <div className='flex flex-col gap-2.5'>
+    <div className='flex flex-col gap-2.5 w-150.25'>
       {members.map((member) => (
         <Row key={member.id} member={member} onSelect={onSelectMember} />
       ))}

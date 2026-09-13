@@ -1,5 +1,3 @@
-// src/utils/formatTime.ts
-
 const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
 export function formatRelativeHours(timestamp: string): string {
