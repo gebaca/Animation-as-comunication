@@ -25,7 +25,7 @@ export default function Conclusion() {
           That distinction matters most in the interfaces least often designed
           for it. In an entitlement or access-governance system, a missed state
           change isn't a cosmetic failure. It's an unreviewed privilege
-          escalation sitting in plain sight. A like-counter can afford to go
+          escalation sitting in plain sight. A like counter can afford to go
           unnoticed. A permissions table can't. Nobody ever finds out the gap
           was there.
           <br />

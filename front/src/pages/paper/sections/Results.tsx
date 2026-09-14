@@ -16,14 +16,14 @@ export default function Results() {
             Finance team. That task kept their attention away from the row that
             was about to change.
           </p>
-          <Graphic totalParticipants={9} standardNoticed={6} traceNoticed={9} />
+          <Graphic totalParticipants={9} standardNoticed={8} traceNoticed={9} />
           <p>
-            Under the standard design, three of nine participants missed the
+            Under the standard design, one out of nine participants missed the
             escalation entirely. Afterward, they described the table as
             unchanged.
             <br />
             <br /> Under Trace, all nine participants noticed the change. That
-            includes every participant who missed it under the standard design.
+            includes the participant who missed it under the standard design.
             Trace closed the full gap. Nobody did worse under Trace than they
             did under the standard design.
           </p>

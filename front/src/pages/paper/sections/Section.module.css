@@ -59,25 +59,22 @@
   font-weight: 500;
   line-height: 1;
 }
-/* añadir a Section.module.css */
-.demoRow {
+
+.demoWrapper {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 20px;
+  flex-direction: column;
+  align-items: flex-start; /* Alinea el GIF y el botón a la izquierda */
+  gap: 6px; /* Distancia exacta de 6px entre el GIF y el botón */
+  margin-top: 1rem;
+  width: 100%;
 }
 
-.gifPlaceholder {
-  width: 220px;
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--background-paper);
-  border: 1px dashed var(--text-paper);
-  color: var(--text-paper);
-  opacity: 0.5;
-  font-size: 13px;
+.gifImage {
+  display: block;
+  width: 100%;
+  max-width: 449px; /* Ancho máximo para mantener la nitidez del GIF recortado */
+  height: auto;
+  border-radius: 6px;
 }
 
 .demoButton {
@@ -90,6 +87,7 @@
   text-decoration: none;
   cursor: pointer;
   transition: opacity 0.2s ease;
+  display: inline-block;
 }
 
 .demoButton:hover {

@@ -16,8 +16,12 @@ export default function Demo() {
             transitions, and a hybrid combination of motion and redundant text.
           </p>
 
-          <div className={styles.demoRow}>
-            <div className={styles.gifPlaceholder}>GIF</div>
+          <div className={styles.demoWrapper}>
+            <img
+              src='/gifDemo.gif'
+              alt='Trace interactive demo'
+              className={styles.gifImage}
+            />
             <Link to='/screen' className={styles.demoButton}>
               View interactive demo
             </Link>

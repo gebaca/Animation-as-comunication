@@ -1,11 +1,24 @@
 import * as React from 'react';
 
-const SvgIconLine: React.FC<React.SVGProps<SVGSVGElement>> = () => (
+interface SvgIconLineProps extends React.SVGProps<SVGSVGElement> {
+  width?: string;
+  strokeWidth?: number | string;
+}
+
+const SvgIconLine: React.FC<SvgIconLineProps> = ({
+  width = '100%',
+  strokeWidth = 2,
+  style,
+  ...props
+}) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
-    width='100%'
-    height='100%'
+    width={width}
+    height={strokeWidth}
     viewBox='0 0 771 2'
+    preserveAspectRatio='none'
+    style={{ display: 'block', width, height: `${strokeWidth}px`, ...style }}
+    {...props}
   >
     <style>{`
       .line-single {
@@ -22,7 +35,7 @@ const SvgIconLine: React.FC<React.SVGProps<SVGSVGElement>> = () => (
     <path
       className='line-single'
       stroke='#5DACED'
-      strokeWidth='2'
+      strokeWidth={strokeWidth}
       d='M0 1h771'
     ></path>
   </svg>
