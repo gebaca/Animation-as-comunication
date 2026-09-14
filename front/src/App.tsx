@@ -1,9 +1,7 @@
-//import Paper from './pages/paper/Paper';
-//<Paper />
-import Screen from './pages/screen/Screen';
+import Paper from './pages/paper/Paper';
 
 function App() {
-  return <Screen />;
+  return <Paper />;
 }
 
 export default App;

@@ -24,13 +24,15 @@
   align-items: flex-start;
 }
 
-/* Título fluido idéntico a la estructura de Intro */
 .title_Text {
-  font-size: 32px;
-  font-weight: bold;
+  font-size: clamp(
+    1.5rem,
+    1.1rem + 1.4vw,
+    1.875rem
+  ); /* ~24px → 30px, esto sí es fluido */
+  font-weight: 700;
   line-height: 1.2;
   color: var(--text-paper, #000);
-  /* Asegura flujo de texto normal */
   display: block;
 }
 
@@ -47,14 +49,13 @@
 }
 
 .content_Section p {
-  font-size: 24px;
+  font-size: 1.125rem; /* 18px, antes 24px */
   line-height: 1.6;
-  max-width: 85%;
+  max-width: 65ch; /* ancho de lectura real, no un % del grid */
 }
-
 .number_Section {
   color: #5daced;
-  font-size: 20px;
+  font-size: 0.9375rem; /* 15px, antes 20px — ahora sí lee como etiqueta secundaria, no compite con el body */
   font-weight: 500;
   line-height: 1;
 }

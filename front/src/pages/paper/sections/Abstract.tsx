@@ -1,11 +1,11 @@
 import Section from './Section';
-import styles from '../Paper.module.css';
+import styles from './Section.module.css';
 
 export default function Abstract() {
   return (
     <Section
       number_Section={'01'}
-      title_Section={<p className={styles.title_Section}>Abstract</p>}
+      title_Section={<p className={styles.title_Text}>Abstract</p>}
       content_Section={
         <p>
           State changes in B2B interfaces routinely go unnoticed. This is change
