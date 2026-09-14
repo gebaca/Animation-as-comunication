@@ -13,7 +13,7 @@ export default function Principles() {
         </p>
       }
       content_Section={
-        <div className='gap-6 flex flex-col'>
+        <>
           <p className='font-bold'>
             {' '}
             <span className={styles.text_Accent}>1.</span> Fewer Changes Are
@@ -48,7 +48,7 @@ export default function Principles() {
             gets tuned out. One that stays quiet until it changes only has to
             ask once. That's the one moment it actually matters.
           </p>
-        </div>
+        </>
       }
     />
   );
