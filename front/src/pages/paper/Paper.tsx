@@ -10,7 +10,7 @@ import Conclusion from './sections/Conclusion.tsx';
 
 function Paper() {
   return (
-    <div className='flex flex-col gap-30'>
+    <div className='flex flex-col gap-16 lg:gap-30'>
       <Intro />
       <Abstract />
       <SvgIconLine width='30%' strokeWidth={3} />

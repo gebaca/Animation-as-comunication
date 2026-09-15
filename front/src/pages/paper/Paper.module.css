@@ -1,41 +1,50 @@
-body {
-  background-color: var(--background-paper);
-  color: var(--text-paper);
-}
-
 .title_Section {
   display: flex;
   flex-direction: column;
-  gap: 5.9375rem; /* Mantiene la separación con el subtítulo */
-
-  padding-left: 6.625rem;
-  padding-right: 6.625rem;
+  gap: 2rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   padding-bottom: 0.625rem;
   padding-top: 1.25rem;
   align-items: flex-start;
 }
 
+@media (min-width: 640px) {
+  .title_Section {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1000px) and (orientation: landscape) {
+  .title_Section {
+    padding-left: 6.625rem;
+    padding-right: 6.625rem;
+    gap: 5.9375rem;
+  }
+}
+
 .title_Text {
-  font-size: 3.75rem;
+  font-size: clamp(2rem, 1.3rem + 3.5vw, 3.75rem);
   color: var(--text-paper);
   font-weight: bold;
-
-  /* Reduce el espacio/separación entre las 2 líneas del título */
   line-height: 1.05;
 }
 
 .text_Accent {
-  font-size: 3.125rem;
+  font-size: clamp(1.7rem, 1.1rem + 3vw, 3.125rem);
   color: var(--accent-paper);
-  /* Mantenemos inline para que 'Functional' fluya en la primera línea */
   display: inline;
 }
+
 .text_Subtitle {
-  font-size: var(--title-section-paper);
-  color: var(--text-paper);
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.25rem);
+  font-weight: 500;
+  color: var(--text-paper, #000);
+  line-height: 1.3;
 }
 
 .text_Subtitle_Accent {
-  font-size: var(--title-section-paper);
-  color: var(--accent-paper);
+  color: var(--accent-paper, #5daced);
 }

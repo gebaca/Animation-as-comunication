@@ -1,24 +1,26 @@
 import * as React from 'react';
 
-interface SvgIconLineProps extends React.SVGProps<SVGSVGElement> {
-  width?: string;
-  strokeWidth?: number | string;
+interface SvgIconLineProps extends Omit<
+  React.SVGProps<SVGSVGElement>,
+  'width' | 'height' | 'strokeWidth'
+> {
+  width?: number | string;
+  strokeWidth?: number;
+  color?: string;
 }
 
 const SvgIconLine: React.FC<SvgIconLineProps> = ({
   width = '100%',
   strokeWidth = 2,
-  style,
-  ...props
+  color = '#5DACED',
+  ...rest
 }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={width}
     height={strokeWidth}
-    viewBox='0 0 771 2'
-    preserveAspectRatio='none'
-    style={{ display: 'block', width, height: `${strokeWidth}px`, ...style }}
-    {...props}
+    viewBox={`0 0 771 ${strokeWidth}`}
+    {...rest}
   >
     <style>{`
       .line-single {
@@ -34,9 +36,9 @@ const SvgIconLine: React.FC<SvgIconLineProps> = ({
     `}</style>
     <path
       className='line-single'
-      stroke='#5DACED'
+      stroke={color}
       strokeWidth={strokeWidth}
-      d='M0 1h771'
+      d={`M0 ${strokeWidth / 2}h771`}
     ></path>
   </svg>
 );

@@ -1,11 +1,28 @@
 .section_Layout {
-  padding-left: 6.625rem;
-  padding-right: 6.625rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   padding-top: 1.5rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   align-items: start;
   height: auto;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section_Layout {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1000px) and (orientation: landscape) {
+  .section_Layout {
+    grid-template-columns: 1fr 1fr;
+    padding-left: 6.625rem;
+    padding-right: 6.625rem;
+    gap: 0;
+  }
 }
 
 /* Reset de márgenes internos */
@@ -25,11 +42,7 @@
 }
 
 .title_Text {
-  font-size: clamp(
-    1.5rem,
-    1.1rem + 1.4vw,
-    1.875rem
-  ); /* ~24px → 30px, esto sí es fluido */
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 1.875rem);
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-paper, #000);
@@ -38,7 +51,7 @@
 
 .text_Accent {
   color: var(--accent-paper, #5daced);
-  display: inline; /* Permite mantenerse en la misma línea */
+  display: inline;
 }
 
 .content_Section {
@@ -49,13 +62,14 @@
 }
 
 .content_Section p {
-  font-size: 1.125rem; /* 18px, antes 24px */
+  font-size: 1.125rem;
   line-height: 1.6;
-  max-width: 65ch; /* ancho de lectura real, no un % del grid */
+  max-width: 65ch;
 }
+
 .number_Section {
   color: #5daced;
-  font-size: 0.9375rem; /* 15px, antes 20px — ahora sí lee como etiqueta secundaria, no compite con el body */
+  font-size: 0.9375rem;
   font-weight: 500;
   line-height: 1;
 }
@@ -63,8 +77,8 @@
 .demoWrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alinea el GIF y el botón a la izquierda */
-  gap: 6px; /* Distancia exacta de 6px entre el GIF y el botón */
+  align-items: flex-start;
+  gap: 6px;
   margin-top: 1rem;
   width: 100%;
 }
@@ -72,7 +86,7 @@
 .gifImage {
   display: block;
   width: 100%;
-  max-width: 449px; /* Ancho máximo para mantener la nitidez del GIF recortado */
+  max-width: 449px;
   height: auto;
   border-radius: 6px;
 }
