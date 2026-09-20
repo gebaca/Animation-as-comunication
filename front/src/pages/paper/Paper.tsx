@@ -10,7 +10,7 @@ import Conclusion from './sections/Conclusion.tsx';
 
 function Paper() {
   return (
-    <div className='flex flex-col gap-16 lg:gap-30'>
+    <div className='flex flex-col gap-16 lg:gap-30 w-full overflow-x-hidden'>
       <Intro />
       <Abstract />
       <SvgIconLine width='30%' strokeWidth={3} />
@@ -30,7 +30,8 @@ function Paper() {
         <SvgIconLine width='100%' strokeWidth={2} />
       </div>
 
-      <div className='flex flex-wrap items-center gap-3 px-26.5 mb-10'>
+      {/* Cambiado px-26.5 a px-6 lg:px-26.5 */}
+      <div className='flex flex-wrap items-center gap-3 px-6 lg:px-26.5 mb-10'>
         <a
           href='https://www.linkedin.com/in/gerard-bataller-canet-963394372/'
           target='_blank'
