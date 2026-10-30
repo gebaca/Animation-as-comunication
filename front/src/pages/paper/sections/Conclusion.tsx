@@ -30,7 +30,7 @@ export default function Conclusion() {
           was there.
           <br />
           <br />
-          This project doesn't claim more than what it tested. Eight
+          This project doesn't claim more than what it tested. Nine
           participants, one interface pattern, one domain, one afternoon. That's
           enough to show a real pattern. It isn't enough to call this a
           validated design system. The right way to read it is as an argument
