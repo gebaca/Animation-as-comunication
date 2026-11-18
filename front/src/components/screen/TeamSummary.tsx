@@ -61,7 +61,7 @@ export default function TeamSummary({
             >
               <div className={`w-1 shrink-0 self-stretch ${styles.accent}`} />
               <p className='text-[length:var(--text-body)] text-(--text-screen) py-1.5 pr-2'>
-                {member.name} - permiso editado{' '}
+                {member.name} - permit changed{' '}
                 {formatRelativeHours(member.recentChange!.timestamp)}
               </p>
             </button>
